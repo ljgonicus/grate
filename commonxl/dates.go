@@ -46,7 +46,9 @@ func (x *Formatter) ConvertToDate(val float64) time.Time {
 
 func timeFmtFunc(f string) FmtFunc {
 	return func(x *Formatter, v interface{}) string {
+		d := (60 * time.Second)
 		t, ok := v.(time.Time)
+		t = t.Round(d) // '2023-09-13 10:44:59.99999979' to '2023-09-13 10:45:00'
 		if !ok {
 			fval, ok := convertToFloat64(v)
 			if !ok {
@@ -63,7 +65,9 @@ func timeFmtFunc(f string) FmtFunc {
 // TODO: implement others
 func cnTimeFmtFunc(f string) FmtFunc {
 	return func(x *Formatter, v interface{}) string {
+		d := (60 * time.Second)
 		t, ok := v.(time.Time)
+		t = t.Round(d) // '2023-09-13 10:44:59.99999979' to '2023-09-13 10:45:00'
 		if !ok {
 			fval, ok := convertToFloat64(v)
 			if !ok {
